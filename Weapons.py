@@ -4,12 +4,6 @@ import random
 
 class ObjectGame(ABC):
     """Абстрактный класс игрового предмета."""
-    apple = None
-    rapier = None
-    totem = None
-    bow = None
-    magic_book = None
-    arrows = None
 
     @abstractmethod
     def item(self):
@@ -19,44 +13,44 @@ class ObjectGame(ABC):
 
 class Apple(ObjectGame):
     def item(self):
-        ObjectGame.apple = random.randint(6, 15)
-        print(f'Нашли хилл на {ObjectGame.apple} хп')
-        return ObjectGame.apple
+        apple = dict()
+        apple['apple'] = random.randint(6, 15)
+        return apple
 
 
 class Rapier(ObjectGame):
     def item(self):
-        ObjectGame.rapier = random.randint(10, 20)
-        print(f'Нашли меч c атакой {ObjectGame.rapier}')
-        return ObjectGame.rapier
+        weapon = dict()
+        weapon['rapier'] = random.randint(10, 20)
+        return weapon
 
 
 class Bow(ObjectGame):
     def item(self):
-        ObjectGame.bow = random.randint(10, 20)
-        print(f'Нашли лук c атакой {ObjectGame.bow}')
-        return ObjectGame.bow
+        bow = dict()
+        bow['bow'] = random.randint(10, 20)
+        return bow
 
 
 class Arrows(ObjectGame):
     def item(self):
-        ObjectGame.arrows = 15
-        print(f'Нашли стрелы {ObjectGame.arrows} штук')
-        return ObjectGame.arrows
+        arrows = dict()
+        arrows['arrows'] = random.randint(5, 15)
+        return arrows
 
 
 class MagicBook(ObjectGame):
     def item(self):
-        ObjectGame.magic_book = random.randint(10, 20)
-        print(f'Нашли магическую книгу с {ObjectGame.magic_book} атакой')
-        return ObjectGame.magic_book
+        magic_book = dict()
+        magic_book['magic_book'] = random.randint(10, 20)
+        return magic_book
 
 
 class Totem(ObjectGame):
     def item(self):
-        ObjectGame.totem = 'Тотем'
-        print(f'Нашли тотем')
-        return ObjectGame.totem
+        totem = dict()
+        totem['totem'] = True
+        return totem
 
 
 class ObjectFactory(ABC):
@@ -129,4 +123,4 @@ def get_item():
 
 
 if __name__ == '__main__':
-    get_item()
+    print(get_item())

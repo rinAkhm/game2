@@ -4,9 +4,6 @@ import random
 
 class Enemy(ABC):
     """Абстрактный класс игрового противника."""
-    monster_hp = None
-    monster_attack = None
-    type_damage = None
 
     @abstractmethod
     def damage(self):
@@ -17,29 +14,34 @@ class Enemy(ABC):
 class Ogre(Enemy):
 
     def damage(self):
-        print('Огр бежит в атаку')
-        Enemy.monster_hp = random.randint(6, 10)
-        Enemy.monster_attack = random.randint(6, 10)
-        Enemy.type_damage = 'physical_attack'
-        return Enemy.type_damage, Enemy.monster_hp, Enemy.monster_attack
+        indicators = dict()
+        indicators['name'] = 'Орк'
+        indicators['type_damage'] = 'mellee'
+        indicators['attack'] = random.randint(6, 10)
+        indicators['hp'] = random.randint(6, 10)
+        return indicators
 
 
 class Skeleton(Enemy):
 
     def damage(self):
-        print('Скелет стреляет стрелами')
-        Enemy.monster_hp = random.randint(6, 10)
-        Enemy.monster_attack = random.randint(6, 10)
-        Enemy.type_damage = 'physical_attack'
-        return Enemy.type_damage, Enemy.monster_hp, Enemy.monster_attack
+        indicators = dict()
+        indicators['name'] = 'Скелет'
+        indicators['type_damage'] = 'long_shot'
+        indicators['attack'] = random.randint(6, 10)
+        indicators['hp'] = random.randint(6, 10)
+        return indicators
+
 
 class Goblin(Enemy):
     def damage(self):
-        print('Гоблин пускает огненные шары')
-        Enemy.monster_hp = random.randint(6, 10)
-        Enemy.monster_attack = random.randint(6, 10)
-        Enemy.type_damage = 'physical_attack'
-        return Enemy.type_damage, Enemy.monster_hp, Enemy.monster_attack
+        indicators = dict()
+        indicators['name'] = 'Гоблин'
+        indicators['type_damage'] = 'spell_shot'
+        indicators['attack'] = random.randint(6, 10)
+        indicators['hp'] = random.randint(6, 10)
+        return indicators
+
 
 class EnemyFactory(ABC):
     """Абстрактная фабрика игрового противника."""
@@ -71,19 +73,22 @@ class GoblinFactory(EnemyFactory):
         return Goblin()
 
 
-spawner_to_factory_mapping = {
-    "ogre": OgreFactory,
-    "skeleton": SkeletonFactory,
-    "goblin": GoblinFactory
-}
+class SpanEnemy:
+    @property
+    def get_monster(self):
+        spawner_to_factory_mapping = {
+            "ogre": OgreFactory,
+            "skeleton": SkeletonFactory,
+            "goblin": GoblinFactory
+        }
 
-# enemy_type_list = ["ogre", "skeleton", "goblin"]
-#
-# for i in range(10):create_enemy
-#     SPAWNER_TYPE = random.choice(enemy_type_list)
-#
-#     spawner = spawner_to_factory_mapping[SPAWNER_TYPE]()
-#
-#     enemy = spawner.create_enemy()
-#     action = enemy.damage()
-#     print(action)
+        enemy_type_list = ["ogre", "skeleton", "goblin"]
+        SPAWNER_TYPE = random.choice(enemy_type_list)
+        spawner = spawner_to_factory_mapping[SPAWNER_TYPE]()
+        enemy = spawner.create_enemy()
+        action = enemy.damage()
+        return action
+
+if __name__ == '__main__':
+    span = SpanEnemy()
+    print(span.get_monster)
